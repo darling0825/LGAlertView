@@ -361,7 +361,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 
 #pragma mark - Progress view properties
 
-@property (assign, nonatomic, readonly) float progress;
+@property (assign, nonatomic) float progress;
 
 /** Default is tintColor */
 @property (strong, nonatomic, nullable) UIColor *progressViewProgressTintColor UI_APPEARANCE_SELECTOR;
@@ -371,12 +371,21 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 @property (strong, nonatomic, nullable) UIImage *progressViewProgressImage UI_APPEARANCE_SELECTOR;
 /** Default is nil */
 @property (strong, nonatomic, nullable) UIImage *progressViewTrackImage UI_APPEARANCE_SELECTOR;
+
+#pragma mark - Progress label properties
+
+@property (strong, nonatomic, nullable) NSString *progressLabelText;
+
 /** Default is UIColor.blackColor */
 @property (strong, nonatomic, nullable) UIColor *progressLabelTextColor UI_APPEARANCE_SELECTOR;
 /** Defailt is NSTextAlignmentCenter */
 @property (assign, nonatomic) NSTextAlignment progressLabelTextAlignment UI_APPEARANCE_SELECTOR;
 /** Default is [UIFont systemFontOfSize:14.0] */
 @property (strong, nonatomic, nullable) UIFont *progressLabelFont UI_APPEARANCE_SELECTOR;
+/** Default is 1 */
+@property (assign, nonatomic) NSUInteger progressLabelNumberOfLines UI_APPEARANCE_SELECTOR;
+/** Default is NSLineBreakByTruncatingTail */
+@property (assign, nonatomic) NSLineBreakMode progressLabelLineBreakMode UI_APPEARANCE_SELECTOR;
 
 #pragma mark - Text fields properties
 
@@ -458,6 +467,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 - (nonnull instancetype)initWithActivityIndicatorAndTitle:(nullable NSString *)title
                                                   message:(nullable NSString *)message
                                                     style:(LGAlertViewStyle)style
+                                        progressLabelText:(nullable NSString *)progressLabelText
                                              buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                         cancelButtonTitle:(nullable NSString *)cancelButtonTitle
                                    destructiveButtonTitle:(nullable NSString *)destructiveButtonTitle;
@@ -465,6 +475,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 - (nonnull instancetype)initWithProgressViewAndTitle:(nullable NSString *)title
                                              message:(nullable NSString *)message
                                                style:(LGAlertViewStyle)style
+                                            progress:(float)progress
                                    progressLabelText:(nullable NSString *)progressLabelText
                                         buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                    cancelButtonTitle:(nullable NSString *)cancelButtonTitle
@@ -497,6 +508,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 + (nonnull instancetype)alertViewWithActivityIndicatorAndTitle:(nullable NSString *)title
                                                        message:(nullable NSString *)message
                                                          style:(LGAlertViewStyle)style
+                                             progressLabelText:(nullable NSString *)progressLabelText
                                                   buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                              cancelButtonTitle:(nullable NSString *)cancelButtonTitle
                                         destructiveButtonTitle:(nullable NSString *)destructiveButtonTitle;
@@ -504,6 +516,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 + (nonnull instancetype)alertViewWithProgressViewAndTitle:(nullable NSString *)title
                                                   message:(nullable NSString *)message
                                                     style:(LGAlertViewStyle)style
+                                                 progress:(float)progress
                                         progressLabelText:(nullable NSString *)progressLabelText
                                              buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                         cancelButtonTitle:(nullable NSString *)cancelButtonTitle
@@ -546,6 +559,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 - (nonnull instancetype)initWithActivityIndicatorAndTitle:(nullable NSString *)title
                                                   message:(nullable NSString *)message
                                                     style:(LGAlertViewStyle)style
+                                        progressLabelText:(nullable NSString *)progressLabelText
                                              buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                         cancelButtonTitle:(nullable NSString *)cancelButtonTitle
                                    destructiveButtonTitle:(nullable NSString *)destructiveButtonTitle
@@ -557,6 +571,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 - (nonnull instancetype)initWithProgressViewAndTitle:(nullable NSString *)title
                                              message:(nullable NSString *)message
                                                style:(LGAlertViewStyle)style
+                                            progress:(float)progress
                                    progressLabelText:(nullable NSString *)progressLabelText
                                         buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                    cancelButtonTitle:(nullable NSString *)cancelButtonTitle
@@ -604,6 +619,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 + (nonnull instancetype)alertViewWithActivityIndicatorAndTitle:(nullable NSString *)title
                                                        message:(nullable NSString *)message
                                                          style:(LGAlertViewStyle)style
+                                             progressLabelText:(nullable NSString *)progressLabelText
                                                   buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                              cancelButtonTitle:(nullable NSString *)cancelButtonTitle
                                         destructiveButtonTitle:(nullable NSString *)destructiveButtonTitle
@@ -615,6 +631,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 + (nonnull instancetype)alertViewWithProgressViewAndTitle:(nullable NSString *)title
                                                   message:(nullable NSString *)message
                                                     style:(LGAlertViewStyle)style
+                                                 progress:(float)progress
                                         progressLabelText:(nullable NSString *)progressLabelText
                                              buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                         cancelButtonTitle:(nullable NSString *)cancelButtonTitle
@@ -657,6 +674,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 - (nonnull instancetype)initWithActivityIndicatorAndTitle:(nullable NSString *)title
                                                   message:(nullable NSString *)message
                                                     style:(LGAlertViewStyle)style
+                                        progressLabelText:(nullable NSString *)progressLabelText
                                              buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                         cancelButtonTitle:(nullable NSString *)cancelButtonTitle
                                    destructiveButtonTitle:(nullable NSString *)destructiveButtonTitle
@@ -665,6 +683,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 - (nonnull instancetype)initWithProgressViewAndTitle:(nullable NSString *)title
                                              message:(nullable NSString *)message
                                                style:(LGAlertViewStyle)style
+                                            progress:(float)progress
                                    progressLabelText:(nullable NSString *)progressLabelText
                                         buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                    cancelButtonTitle:(nullable NSString *)cancelButtonTitle
@@ -701,6 +720,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 + (nonnull instancetype)alertViewWithActivityIndicatorAndTitle:(nullable NSString *)title
                                                        message:(nullable NSString *)message
                                                          style:(LGAlertViewStyle)style
+                                             progressLabelText:(nullable NSString *)progressLabelText
                                                   buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                              cancelButtonTitle:(nullable NSString *)cancelButtonTitle
                                         destructiveButtonTitle:(nullable NSString *)destructiveButtonTitle
@@ -709,6 +729,7 @@ typedef NS_ENUM(NSUInteger, LGAlertViewWindowLevel) {
 + (nonnull instancetype)alertViewWithProgressViewAndTitle:(nullable NSString *)title
                                                   message:(nullable NSString *)message
                                                     style:(LGAlertViewStyle)style
+                                                 progress:(float)progress
                                         progressLabelText:(nullable NSString *)progressLabelText
                                              buttonTitles:(nullable NSArray<NSString *> *)buttonTitles
                                         cancelButtonTitle:(nullable NSString *)cancelButtonTitle
