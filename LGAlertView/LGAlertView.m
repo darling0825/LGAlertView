@@ -1680,10 +1680,12 @@ LGAlertViewType;
 
     [keyWindow endEditing:YES];
 
+    //Sometimes you need to display a LGAlertView on a LGAlertView
+    /*
     if (!hidden && keyWindow != LGAlertViewHelper.appWindow) {
         keyWindow.hidden = YES;
     }
-
+    */
     [self.window makeKeyAndVisible];
 
     // -----
